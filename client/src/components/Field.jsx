@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import calcDistance from '../utils/calcDistance';
 import SetUser from './SetUser.jsx';
+import Hub from './Hub.jsx';
 
 export default (props) => {
   const [ windowDimensions, setWindowDimensions ] = useState({
@@ -10,6 +11,7 @@ export default (props) => {
   });
   const [ username, setUsername ] = useState('');
   const [ usernameModal, setUsernameModal ] = useState(true);
+  const [ displayHubModal, setDisplayHubModal ] = useState(false);
   const [ gameInProgress, setGameInProgress ] = useState(false);
   const [ targetsRemaining, setTargetsRemaining ] = useState(0);
   const [ targetVisible, setTargetVisible ] = useState(false);
@@ -53,6 +55,7 @@ export default (props) => {
   const submitHandler = e => {
     e.preventDefault();
     setUsernameModal(false);
+    setDisplayHubModal(true);
   };
   let timer;
   const countdown = () => timer = setTimeout(() => {
@@ -101,6 +104,13 @@ export default (props) => {
         submitHandler={submitHandler} />
     : null;
 
+  const hubModal = displayHubModal
+    ? <Hub
+        username={username}
+        setUsernameModal={setUsernameModal}
+        setDisplayHubModal={setDisplayHubModal} />
+    : null;
+
   return (
     <div>
       { startButton }
@@ -109,6 +119,7 @@ export default (props) => {
         className='target'
         style={targetPosition}></button>
       { setUserModal }
+      { hubModal }
     </div>
   );
 };
