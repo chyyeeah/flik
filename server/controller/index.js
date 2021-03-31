@@ -14,9 +14,10 @@ module.exports.getAllScores = async (req, res) => {
 module.exports.addScore = async (req, res) => {
   const currentDate = new Date().toUTCString();
   const scoresToInsert = [];
-  req.body.forEach(score => {
+  req.body.results.forEach(score => {
     scoresToInsert.push(insertScore(
       currentDate,
+      req.body.player,
       score.distance_from_target,
       score.click_time
     ));
