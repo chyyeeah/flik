@@ -5,7 +5,8 @@ import SetUser from './SetUser.jsx';
 
 export default (props) => {
   const [ windowDimensions, setWindowDimensions ] = useState({
-    width: window.innerWidth, height: window.innerHeight
+    width: window.innerWidth,
+    height: window.innerHeight
   });
   const [ username, setUsername ] = useState('');
   const [ usernameModal, setUsernameModal ] = useState(true);
@@ -26,7 +27,7 @@ export default (props) => {
     if (targetsRemaining < 1) {
       if (gameInProgress) {
         setGameInProgress(false);
-        axios.post('/score', results)
+        axios.post('/score', { player: username, results })
           .then(() => {
             setResults([]);
           });
