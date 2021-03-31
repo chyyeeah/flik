@@ -5,7 +5,7 @@ module.exports.getAllScores = () => db`
   FROM scores
 `;
 
-module.exports.insertScore = (date, distance, duration) => db`
-  INSERT INTO scores (created_date, distance_from_target, click_time)
-  VALUES (${date}, ${distance}, ${duration})
+module.exports.insertScore = (date, player, distance, duration) => db`
+  INSERT INTO scores (created_date, player, distance_from_target, click_time)
+  VALUES (${date}, ${player}, ${distance}, ${duration})
 `;
