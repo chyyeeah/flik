@@ -1,14 +1,21 @@
-const { getAllScores, insertScore } = require('../model/index.js');
+const { selectStats, insertScore } = require('../model/index.js');
+const parseData = require('../utils/parseData.js');
 
 const dateUTC = () => {
   const curDate = new Date();
   return `${curDate.getUTCFullYear()}-${curDate.getUTCMonth()}-${curDate.getUTCDate()}`;
 };
 
-module.exports.getAllScores = async (req, res) => {
-  const test = await getAllScores();
-  console.log(test);
-  res.sendStatus(200);
+module.exports.getStats = async (req, res) => {
+  try {
+    const results = await selectStats(req.params.username);
+    const payload = parseData(results);
+    console.log(payload);
+    res.send(payload);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(400);
+  }
 };
 
 module.exports.addScore = async (req, res) => {
