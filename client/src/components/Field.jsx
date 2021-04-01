@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import calcDistance from '../utils/calcDistance';
-import SetUser from './SetUser.jsx';
-import Hub from './Hub.jsx';
+import SetUserModal from './SetUser.jsx';
+import HubModal from './Hub.jsx';
 
 export default (props) => {
   const [ windowDimensions, setWindowDimensions ] = useState({
@@ -51,9 +51,8 @@ export default (props) => {
     }
   }, [ targetsRemaining ]);
 
-  const inputHandler = e => setUsername(e.target.value);
-  const submitHandler = e => {
-    e.preventDefault();
+  const setUser = name => {
+    setUsername(name);
     setUsernameModal(false);
     setDisplayHubModal(true);
   };
@@ -100,14 +99,12 @@ export default (props) => {
   const setUserModal = usernameModal
     ? <SetUser
         username={username}
-        inputHandler={inputHandler}
-        submitHandler={submitHandler} />
+        setUser={setUser} />
     : null;
 
   const hubModal = displayHubModal
     ? <Hub
         username={username}
-        setUsernameModal={setUsernameModal}
         setDisplayHubModal={setDisplayHubModal} />
     : null;
 
