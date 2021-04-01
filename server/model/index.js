@@ -1,5 +1,5 @@
 const moment = require('moment');
-const db = require('../db/index.js');
+const { db } = require('../db/index.js');
 
 module.exports.selectStats = (username) => db`
   SELECT

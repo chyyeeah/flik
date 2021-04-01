@@ -12,7 +12,6 @@ app.use(express.static(path.resolve('client/dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.get('/scores', getAllScores);
 app.get('/stats/:username', getStats)
 app.post('/score', addScore);
 
