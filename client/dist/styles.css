@@ -86,7 +86,7 @@ h2 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -60%);
   background-color: #fff;
   border: 1px solid grey;
   border-radius: 5px;
@@ -94,10 +94,28 @@ h2 {
   padding: 50px;
 }
 
-.stats-graph {
-  width: 300px;
-  height: 300px;
+.wrapper {
+  width: 1000px;
+  height: 600px;
+  position: relative;
   margin-bottom: 30px;
+}
+
+.distance-graph {
+  position: absolute;
+  height: 600px;
+  width: 100%;
+  top: 0px;
+  z-index: 5;
+}
+
+.duration-graph {
+  position: absolute;
+  height: 600px;
+  width: 100%;
+  top: 0px;
+  left: 7px;
+  z-index: 4;
 }
 
 /* GAMEPLAY */
