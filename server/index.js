@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-const { getAllScores, addScore } = require('./controller/index.js');
+const { getStats, addScore } = require('./controller/index.js');
 
 const app = express();
 app.use(morgan('dev'));
@@ -12,7 +12,8 @@ app.use(express.static(path.resolve('client/dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/scores', getAllScores);
+// app.get('/scores', getAllScores);
+app.get('/stats/:username', getStats)
 app.post('/score', addScore);
 
 const PORT = 1337;
