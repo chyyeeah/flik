@@ -9,9 +9,8 @@ export default ({ username, setUsernameModal, setDisplayHubModal }) => {
 
   return (
     <div className='hub-modal'>
-      <div className='stats-graph'>
-        <Stats />
-      </div>
+      <h2>Hello, {username}!</h2>
+      <Stats username={username} />
       <button onClick={playClickHandler}>Play?</button>
     </div>
   );
