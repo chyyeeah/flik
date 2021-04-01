@@ -20,15 +20,6 @@ export default ({ username }) => {
         <div className='distance-graph'>
           <ResponsiveLine
             data={distanceData}
-            theme={{
-              axis: {
-                legend: {
-                  text: {
-                    fill: 'green'
-                  }
-                }
-              }
-            }}
             colors={['green']}
             curve="natural"
             pointSize={12}
@@ -44,21 +35,6 @@ export default ({ username }) => {
         <div className='duration-graph'>
           <ResponsiveLine
             data={durationData}
-            theme={{
-              axis: {
-                // ticks: {
-                //   line: {
-                //     stroke: color
-                //   },
-                //   text: { fill: color }
-                // },
-                legend: {
-                  text: {
-                    fill: 'red'
-                  }
-                }
-              }
-            }}
             colors={['red']}
             curve="natural"
             pointSize={12}
@@ -71,7 +47,9 @@ export default ({ username }) => {
             axisRight={{
               legend: 'Reaction Time (ms)',
               legendPosition: 'center',
-              legendOffset: 60
+              legendOffset: 50,
+              tickPadding: 2,
+              tickSize: 5
             }}
             margin={{ top: 50, right: 50, bottom: 80, left: 50 }} />
         </div>
