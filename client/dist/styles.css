@@ -52,6 +52,10 @@ table {
   box-sizing: border-box;
 }
 
+button {
+  outline: none;
+}
+
 h1 {
   font-size: 5em;
 }
@@ -61,23 +65,8 @@ h2 {
 }
 
 /* USER MODAL */
-.username-modal {
-  z-index: 500;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 300px;
-  background-color: #fff;
-  border: 1px solid grey;
-  border-radius: 5px;
-  text-align: center;
-  padding: 50px;
-}
-
-.username-modal form {
-  margin-top: 40px;
+.modal {
+  z-index: 1000;
 }
 
 /* Hub */
@@ -95,7 +84,7 @@ h2 {
 }
 
 .wrapper {
-  width: 1000px;
+  width: 100%;
   height: 600px;
   position: relative;
   margin-bottom: 30px;
@@ -119,7 +108,6 @@ h2 {
 }
 
 /* GAMEPLAY */
-
 #start {
   position: absolute;
   top: 50%;
@@ -129,8 +117,13 @@ h2 {
   height: 50px;
   border: 0;
   border-radius: 50%;
-  background-color: green;
+  background-color: #000;
   z-index: 300;
+  transition: background-color 3s;
+}
+
+#start:hover {
+  background-color: transparent;
 }
 
 .target {
