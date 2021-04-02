@@ -13,7 +13,16 @@ module.exports.selectStats = (username) => db`
   ORDER BY created_date ASC
 `;
 
-module.exports.insertScore = (date, player, distance, duration) => db`
+module.exports.selectCareerStats = username => db`
+  SELECT
+    AVG(distance_from_target) AS avgCareerDistance,
+    AVG(click_time) AS avgCareerDuration
+  FROM scores
+  WHERE player = ${username}
+  GROUP BY player
+`;
+
+module.exports.insertScore = (player, distance, duration) => db`
   INSERT INTO scores (created_date, player, distance_from_target, click_time)
-  VALUES (${date}, ${player}, ${distance}, ${duration})
+  VALUES (${moment().format()}, ${player}, ${distance}, ${duration})
 `;
