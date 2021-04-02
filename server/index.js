@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-const { getStats, addScore } = require('./controller/index.js');
+const { getStats, getCareerStats, addScore } = require('./controller/index.js');
 
 const app = express();
 app.use(morgan('dev'));
@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/stats/:username', getStats)
+app.get('/stats/:username/career', getCareerStats)
 app.post('/score', addScore);
 
 const PORT = 1337;
