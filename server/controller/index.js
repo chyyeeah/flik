@@ -1,16 +1,21 @@
-const { selectStats, insertScore } = require('../model/index.js');
+const { selectStats, selectCareerStats, insertScore } = require('../model/index.js');
 const parseData = require('../utils/parseData.js');
-
-const dateUTC = () => {
-  const curDate = new Date();
-  return `${curDate.getUTCFullYear()}-${curDate.getUTCMonth()}-${curDate.getUTCDate()}`;
-};
 
 module.exports.getStats = async (req, res) => {
   try {
-    const results = await selectStats(req.params.username);
-    const payload = parseData(results);
-    console.log(payload);
+    const weeklyStats = await selectStats(req.params.username);
+    const payload = parseData(weeklyStats);
+    res.send(payload);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(400);
+  }
+};
+
+module.exports.getCareerStats = async (req, res) => {
+  try {
+    const careerStats = await selectCareerStats(req.params.username);
+    const payload = careerStats[0];
     res.send(payload);
   } catch (error) {
     console.error(error);
@@ -19,11 +24,9 @@ module.exports.getStats = async (req, res) => {
 };
 
 module.exports.addScore = async (req, res) => {
-  const currentDate = new Date().toUTCString();
   const scoresToInsert = [];
   req.body.results.forEach(score => {
     scoresToInsert.push(insertScore(
-      currentDate,
       req.body.player,
       score.distance_from_target,
       score.click_time
