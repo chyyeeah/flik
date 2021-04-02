@@ -52,6 +52,10 @@ table {
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 button {
   outline: none;
 }
