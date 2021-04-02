@@ -9,7 +9,6 @@ export default ({ username }) => {
   useEffect(() => {
     axios.get(`/stats/${username}`)
       .then(res => {
-        console.log(res);
         setDistanceData(res.data.resultDistance);
         setDurationData(res.data.resultDuration);
       });
@@ -30,7 +29,8 @@ export default ({ username }) => {
               legendPosition: 'center',
               legendOffset: -40
             }}
-            margin={{ top: 50, right: 40, bottom: 80, left: 50 }} />
+            margin={{ top: 0, right: 40, bottom: 80, left: 50 }}
+            isInteractive={false} />
         </div>
         <div className='duration-graph'>
           <ResponsiveLine
@@ -51,7 +51,8 @@ export default ({ username }) => {
               tickPadding: 2,
               tickSize: 5
             }}
-            margin={{ top: 50, right: 50, bottom: 80, left: 50 }} />
+            margin={{ top: 0, right: 50, bottom: 80, left: 50 }}
+            isInteractive={false} />
         </div>
       </>
     : null;
