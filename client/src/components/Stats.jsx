@@ -29,7 +29,7 @@ export default ({ username }) => {
               legendPosition: 'center',
               legendOffset: -40
             }}
-            margin={{ top: 0, right: 40, bottom: 80, left: 50 }}
+            margin={{ top: 10, right: 40, bottom: 20, left: 50 }}
             isInteractive={false} />
         </div>
         <div className='duration-graph'>
@@ -51,7 +51,7 @@ export default ({ username }) => {
               tickPadding: 2,
               tickSize: 5
             }}
-            margin={{ top: 0, right: 50, bottom: 80, left: 50 }}
+            margin={{ top: 10, right: 50, bottom: 20, left: 50 }}
             isInteractive={false} />
         </div>
       </>
