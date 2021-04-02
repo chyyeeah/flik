@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import calcDistance from '../utils/calcDistance';
-import SetUserModal from './SetUser.jsx';
-import HubModal from './Hub.jsx';
+import SetUserModal from './SetUserModal.jsx';
+import HubModal from './HubModal.jsx';
 
 export default (props) => {
   const [ windowDimensions, setWindowDimensions ] = useState({
@@ -31,13 +31,13 @@ export default (props) => {
         setGameInProgress(false);
         axios.post('/score', { player: username, results })
           .then(() => {
-            setResults([]);
+            setDisplayHubModal(true);
           });
       }
     } else {
+      const posX = 15 + Math.floor(Math.random() * (windowDimensions.width - 50));
+      const posY = 15 + Math.floor(Math.random() * windowDimensions.height - 50);
       setTimeout(() => {
-        const posX = Math.floor(Math.random() * windowDimensions.width);
-        const posY = Math.floor(Math.random() * windowDimensions.height);
         setStartTime(new Date().getTime());
         setTargetPosition({
           width: '30px',
@@ -56,6 +56,7 @@ export default (props) => {
     setUsernameModal(false);
     setDisplayHubModal(true);
   };
+
   let timer;
   const countdown = () => timer = setTimeout(() => {
     setTargetsRemaining(1);
@@ -97,15 +98,17 @@ export default (props) => {
     : null;
 
   const setUserModal = usernameModal
-    ? <SetUser
+    ? <SetUserModal
         username={username}
         setUser={setUser} />
     : null;
 
   const hubModal = displayHubModal
-    ? <Hub
+    ? <HubModal
         username={username}
-        setDisplayHubModal={setDisplayHubModal} />
+        setDisplayHubModal={setDisplayHubModal}
+        results={results}
+        setResults={setResults} />
     : null;
 
   return (
