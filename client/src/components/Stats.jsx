@@ -9,12 +9,13 @@ export default ({ username }) => {
   useEffect(() => {
     axios.get(`/stats/${username}`)
       .then(res => {
+        console.log(res.data);
         setDistanceData(res.data.resultDistance);
         setDurationData(res.data.resultDuration);
       });
   }, []);
 
-  const statsGraph = distanceData.length > 0 && durationData.length > 0
+  const statsGraph = distanceData && durationData && distanceData.length > 0 && durationData.length > 0
     ? <>
         <div className='distance-graph'>
           <ResponsiveLine
