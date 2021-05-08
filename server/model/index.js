@@ -4,6 +4,7 @@ const mongoose = require('../db/index.js');
 const userSchema = mongoose.Schema({
   created_date: Date,
   username: String,
+  difficulty: String,
   duration: Number,
   distance: Number
 });
