@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import calcDistance from '../utils/calcDistance';
+import calculateDistance from '../utils/calculateDistance';
 import SetUserModal from './SetUserModal.jsx';
 import HubModal from './HubModal.jsx';
 
@@ -24,6 +24,8 @@ export default (props) => {
   });
   const [ startTime, setStartTime ] = useState(0);
   const [ results, setResults ] = useState([]);
+  const [ gameMode, setGameMode ] = useState('easy');
+  const [ targetRadius, setTargetRadius ] = useState(75);
 
   useEffect(() => {
     if (targetsRemaining < 1) {
@@ -35,13 +37,13 @@ export default (props) => {
           });
       }
     } else {
-      const posX = 15 + Math.floor(Math.random() * (windowDimensions.width - 50));
-      const posY = 15 + Math.floor(Math.random() * windowDimensions.height - 50);
+      const posX = 15 + Math.floor(Math.random() * (windowDimensions.width - targetRadius));
+      const posY = 15 + Math.floor(Math.random() * (windowDimensions.height) - targetRadius);
       setTimeout(() => {
         setStartTime(new Date().getTime());
         setTargetPosition({
-          width: '30px',
-          height: '30px',
+          width: `${targetRadius}px`,
+          height: `${targetRadius}px`,
           top: `${posY}px`,
           left: `${posX}px`,
           backgroundColor: 'red'
@@ -50,6 +52,16 @@ export default (props) => {
       }, Math.random() * 1000);
     }
   }, [ targetsRemaining ]);
+
+  useEffect(() => {
+    if (gameMode === 'easy') {
+      setTargetRadius(75);
+    } else if (gameMode === 'medium') {
+      setTargetRadius(30);
+    } else if (gameMode === 'hard') {
+      setTargetRadius(15);
+    }
+  }, [ gameMode ]);
 
   const setUser = name => {
     setUsername(name);
@@ -64,11 +76,12 @@ export default (props) => {
   }, 2000);
   const abortStart = () => clearTimeout(timer);
   const clickAttempt = (e) => {
-    const distance = calcDistance(
+    const distance = calculateDistance(
       targetPosition.left,
       targetPosition.top,
       e.pageX,
       e.pageY,
+      targetRadius
     );
     const duration = new Date().getTime() - startTime;
 
@@ -108,7 +121,9 @@ export default (props) => {
         username={username}
         setDisplayHubModal={setDisplayHubModal}
         results={results}
-        setResults={setResults} />
+        setResults={setResults}
+        gameMode={gameMode}
+        setGameMode={setGameMode} />
     : null;
 
   return (
