@@ -5,10 +5,7 @@ const moment = require('moment');
 module.exports.getStats = async (req, res) => {
   try {
     const weeklyStats = await selectStats(req.params.username);
-    // const payload = parseData(weeklyStats);
-    console.log(weeklyStats);
     const payload = parseData(weeklyStats);
-    console.log(payload.resultDuration[0].data);
     res.send(payload);
   } catch (error) {
     console.error(error);
@@ -19,7 +16,6 @@ module.exports.getStats = async (req, res) => {
 module.exports.getCareerStats = async (req, res) => {
   try {
     const careerStats = await selectCareerStats(req.params.username);
-    console.log(careerStats);
     const payload = careerStats[0];
     res.send(payload);
   } catch (error) {
